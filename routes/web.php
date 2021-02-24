@@ -105,11 +105,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('documents/send_mail', 'DocumentController@sendMail')->name('documents.sendMail');
     Route::resource('documents', 'DocumentController');
 
+    // Document Letter
+//    Route::delete('document_letters/destroy', 'DocumentLetterController@massDestroy')->name('document_letters.massDestroy');
+    Route::resource('document_letters', 'DocumentLetterController');
+
     // Comments
     Route::delete('comments/destroy', 'CommentController@massDestroy')->name('comments.massDestroy');
     Route::post('comments/media', 'CommentController@storeMedia')->name('comments.storeMedia');
     Route::post('comments/ckmedia', 'CommentController@storeCKEditorImages')->name('comments.storeCKEditorImages');
     Route::resource('comments', 'CommentController');
+
+
 
     // User Infos
     Route::delete('user-infos/destroy', 'UserInfoController@massDestroy')->name('user-infos.massDestroy');

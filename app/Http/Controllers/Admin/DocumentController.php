@@ -182,7 +182,7 @@ class DocumentController extends Controller
 
         $categories = Category::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $organisations = Organisation::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $organisations = Organisation::all()->pluck('name', 'id');
 
         $users = User::all()->pluck('name', 'id');
 
@@ -193,7 +193,6 @@ class DocumentController extends Controller
 
     public function store(StoreDocumentRequest $request)
     {
-//        dd($request->all());
         abort_if(Gate::denies('document_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if (!request('document_type_id')) {
@@ -204,7 +203,9 @@ class DocumentController extends Controller
         }
 
         $document = Document::create($request->all());
-        $document->update(['code_in'=>$this->CodeIn($document->id)]);
+        // Auto code_in
+        $cat=$document->category->getCatCode();
+        $document->update(['code_in'=>$cat]);
 
         $users=collect(array_flip($request->input('users', [])))
             ->map(function ($user){
@@ -220,20 +221,7 @@ class DocumentController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $document->id]);
         }
 
-//        $email=$document->users->pluck('email')->toArray();
         $this->sendMail($document);
-
-        //send mail to user comment
-//        foreach ($request->input('users') as $user)
-//        {
-//            $details=[
-//                'subject'=>'យោបល់លើឯកសារ លេខៈ '. $document->code_in ,
-//                'title'=>'លោកអ្នកត្រូវមានយោបល់លើឯកសារលេខៈ <b>' . $document->code_in . '</b>។ សូមលោកអ្នកចុចលើតំណរភ្ជាប់ខាងក្រោម ដើម្បីមានយោបល់៖',
-//                'body'=>'<a class="btn btn-primary" href="'. route('admin.documents.show',$document->id) .'"><i class="fa fa-hand-point-right"></i> ឯកសារលេខ '. $document->code_in . '</a>',
-//            ];
-//            $email=User::findOrFail($user)->email;
-//            $this->sendMail($details,$email);
-//        }
 
         return redirect()->route('admin.documents.index');
     }
@@ -363,9 +351,9 @@ class DocumentController extends Controller
 //        return $pdf->stream();
 
 
-        $pdf=Pdf::loadView('admin.documents.includes.print', ['document'=>$document,'users'=>$users]);
-        $stylesheet = file_get_contents(base_path().'/public/css/app.css');
-        return $pdf->stream('document.pdf');
+//        $pdf=Pdf::loadView('admin.documents.includes.print', ['document'=>$document,'users'=>$users]);
+//        $stylesheet = file_get_contents(base_path().'/public/css/app.css');
+//        return $pdf->stream('document.pdf');
 
 
 //        $path = Storage::disk('local')->path("_letters(".$letterCount."-letters).pdf");
@@ -408,7 +396,7 @@ class DocumentController extends Controller
 //        $export = new DocumentExport($document,$users);
 //        return Excel::download($export, $document->code_in.'.pdf', \Maatwebsite\Excel\Excel::MPDF);
 //
-//        return view('admin.documents.includes.print',compact('document','users'));
+        return view('admin.documents.includes.print_html',compact('document','users'));
     }
 
     public function sendMail(Document $document)

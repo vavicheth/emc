@@ -39,22 +39,22 @@
                             {{ $document->code_in }}
                         </td>
                     </tr>
-{{--                    <tr>--}}
-{{--                        <th>--}}
-{{--                            {{ trans('cruds.document.fields.code_out') }}--}}
-{{--                        </th>--}}
-{{--                        <td>--}}
-{{--                            {{ $document->code_out }}--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
                     <tr>
                         <th>
-                            {{ trans('cruds.document.fields.document_code') }}
+                            {{ trans('cruds.document.fields.code_out') }}
                         </th>
                         <td>
-                            {{ $document->document_code }}
+                            {{ $document->code_out }}
                         </td>
                     </tr>
+{{--                    <tr>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.document.fields.document_code') }}--}}
+{{--                        </th>--}}
+{{--                        <td>--}}
+{{--                            {{ $document->document_code }}--}}
+{{--                        </td>--}}
+{{--                    </tr>--}}
 
                     <tr>
                         <th>
@@ -164,11 +164,11 @@
     <div>
         <div class="nav-tabs-custom card card-primary card-outline card-tabs">
             <ul class="nav nav-tabs" id="document-tab" >
-                <li class="nav-item"><a class="nav-link show active" href="#tab-comments" data-toggle="tab">Comments</a></li>
-                <li class="nav-item"><a class="nav-link" href="#tab-letter" data-toggle="tab">Letter</a></li>
+                <li class="nav-item"><a class="nav-link {{session()->has('letter') ? '':'show active'}}" href="#tab-comments" data-toggle="tab">Comments</a></li>
+                <li class="nav-item"><a class="nav-link {{session()->has('letter') ? 'show active':''}}" href="#tab-letter" data-toggle="tab">Letter</a></li>
             </ul>
             <div class="tab-content" id="document-tab">
-                <div class="tab-pane fade show active" id="tab-comments" role="tabpanel" aria-labelledby="tab-comments">
+                <div class="tab-pane fade {{session()->has('letter') ? '':'show active'}}" id="tab-comments" role="tabpanel" aria-labelledby="tab-comments">
                     <div class="card-body">
 
                     @if ($users->whereIn('id',auth()->id())->count() > 0 || auth()->user()->can('comment_status_view') || auth()->user()->can('comment_grand_access'))
@@ -184,9 +184,12 @@
                     </div>
                 </div>
 
-                <div class="tab-pane fade show" id="tab-letter" role="tabpanel" aria-labelledby="tab-comments">
+                <div class="tab-pane fade {{session()->has('letter') ? 'show active':''}}" id="tab-letter" role="tabpanel" aria-labelledby="tab-comments">
                     <div class="card-body">
-                        @include('admin.documents.includes.document_letter')
+                        @can('document_letter_access')
+                            @include('admin.documents.includes.document_letter')
+                        @endcan
+
                     </div>
                 </div>
             </div>

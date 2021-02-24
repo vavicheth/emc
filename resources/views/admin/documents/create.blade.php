@@ -33,14 +33,14 @@
 {{--                @endif--}}
 {{--                <span class="help-block">{{ trans('cruds.document.fields.code_out_helper') }}</span>--}}
 {{--            </div>--}}
-            <div class="form-group">
-                <label for="document_code">{{ trans('cruds.document.fields.document_code') }}</label>
-                <input class="form-control {{ $errors->has('document_code') ? 'is-invalid' : '' }}" type="text" name="document_code" id="document_code" value="{{ old('document_code', '') }}">
-                @if($errors->has('document_code'))
-                    <span class="text-danger">{{ $errors->first('document_code') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.document.fields.document_code_helper') }}</span>
-            </div>
+{{--            <div class="form-group">--}}
+{{--                <label for="document_code">{{ trans('cruds.document.fields.document_code') }}</label>--}}
+{{--                <input class="form-control {{ $errors->has('document_code') ? 'is-invalid' : '' }}" type="text" name="document_code" id="document_code" value="{{ old('document_code', '') }}">--}}
+{{--                @if($errors->has('document_code'))--}}
+{{--                    <span class="text-danger">{{ $errors->first('document_code') }}</span>--}}
+{{--                @endif--}}
+{{--                <span class="help-block">{{ trans('cruds.document.fields.document_code_helper') }}</span>--}}
+{{--            </div>--}}
 {{--            <div class="form-group">--}}
 {{--                <label for="from_organisation">{{ trans('cruds.document.fields.from_organisation') }}</label>--}}
 {{--                <input class="form-control {{ $errors->has('from_organisation') ? 'is-invalid' : '' }}" type="text" name="from_organisation" id="from_organisation" value="{{ old('from_organisation', '') }}">--}}
@@ -49,18 +49,18 @@
 {{--                @endif--}}
 {{--                <span class="help-block">{{ trans('cruds.document.fields.from_organisation_helper') }}</span>--}}
 {{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="category_id">{{ trans('cruds.document.fields.category') }}</label>--}}
-{{--                <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category_id" id="category_id">--}}
-{{--                    @foreach($categories as $id => $category)--}}
-{{--                        <option value="{{ $id }}" {{ old('category_id') == $id ? 'selected' : '' }}>{{ $category }}</option>--}}
-{{--                    @endforeach--}}
-{{--                </select>--}}
-{{--                @if($errors->has('category'))--}}
-{{--                    <span class="text-danger">{{ $errors->first('category') }}</span>--}}
-{{--                @endif--}}
-{{--                <span class="help-block">{{ trans('cruds.document.fields.category_helper') }}</span>--}}
-{{--            </div>--}}
+            <div class="form-group">
+                <label for="category_id">{{ trans('cruds.document.fields.category') }} <span class="text-danger">*</span> </label>
+                <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category_id" id="category_id" required>
+                    @foreach($categories as $id => $category)
+                        <option value="{{ $id }}" {{ old('category_id') == $id ? 'selected' : '' }}>{{ $category }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('category'))
+                    <span class="text-danger">{{ $errors->first('category') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.document.fields.category_helper') }}</span>
+            </div>
             <div class="form-group">
                 <label class="required" for="organisation_id">{{ trans('cruds.document.fields.organisation') }}</label>
                 <select class="form-control select2 {{ $errors->has('organisation') ? 'is-invalid' : '' }}" name="organisation_id" id="organisation_id" required>

@@ -1,59 +1,62 @@
 <div class="box">
     <div class="box-header">
-        <h3 class="box-title">Document Letter</h3>
+        <h3 class="box-title">លិខិត</h3>
+        <button class="btn btn-success" data-toggle="modal" data-target="#letter-create" data-backdrop="static" data-keyboard="false">Add New</button>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
         <table id="example1" class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>Title</th>
-                <th>Reference</th>
-                <th>Title2</th>
-                <th>Title3</th>
-                <th>Description</th>
+                <th>ចំណងជើង</th>
+                <th>យោង</th>
+                <th>តំណងអង្គភាព</th>
+                <th>អត្ថន័យ</th>
+                <th>បរិយាយ</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>លិខិតបង្គាប់ការ</td>
-                <td>-យោងលិខិតលេខ
-                </td>
-                <td>នាយក</td>
-                <td> សម្រេច</td>
-                <td>លោក សុខ </td>
-            </tr>
-            <tr>
-                <td>លិខិតបង្គាប់ការ</td>
-                <td>-យោងលិខិតលេខ
-                </td>
-                <td>នាយក</td>
-                <td> សម្រេច</td>
-                <td>លោក សុខ </td>
-            </tr>
-            <tr>
-                <td>លិខិតបង្គាប់ការ</td>
-                <td>-យោងលិខិតលេខ
-                </td>
-                <td>នាយក</td>
-                <td> សម្រេច</td>
-                <td>លោក សុខ </td>
-            </tr>
+                @foreach($document->documentLetters as $letter)
+                    <tr>
+                        <td>{{$letter->title1}}</td>
+                        <td>{!! Str::limit($letter->reference,25)!!}</td>
+                        <td>{!! $letter->title2 !!}</td>
+                        <td> {!! $letter->title3 !!}</td>
+                        <td>{!! Str::limit($letter->description,25)!!}</td>
+                        <td>
+                            @can('document_letter_show')
+                                <a class="btn btn-xs btn-primary" href="{{ route('admin.document_letters.show', $letter->id) }}">
+                                   <i class="fa fa-print"></i> Print
+                                </a>
+                            @endcan
 
+                            @can('document_letter_edit')
+                                <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#letter{{$letter->id}}" data-backdrop="static" data-keyboard="false">Edit</button>
+                            @endcan
 
+                            @can('document_letter_delete')
+                                <form action="{{ route('admin.document_letters.destroy', $letter->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                </form>
+                            @endcan
+
+                        </td>
+                    </tr>
+
+                    @include('admin.documents.includes.modal_letter_edit')
+
+                @endforeach
 
             </tbody>
-{{--            <tfoot>--}}
-{{--            <tr>--}}
-{{--                <th>Rendering engine</th>--}}
-{{--                <th>Browser</th>--}}
-{{--                <th>Platform(s)</th>--}}
-{{--                <th>Engine version</th>--}}
-{{--                <th>CSS grade</th>--}}
-{{--            </tr>--}}
-{{--            </tfoot>--}}
         </table>
+
+
+
     </div>
     <!-- /.box-body -->
+    @include('admin.documents.includes.modal_letter_create')
 </div>
 <!-- /.box -->

@@ -34,14 +34,14 @@
 {{--                @endif--}}
 {{--                <span class="help-block">{{ trans('cruds.document.fields.code_out_helper') }}</span>--}}
 {{--            </div>--}}
-            <div class="form-group">
-                <label for="document_code">{{ trans('cruds.document.fields.document_code') }}</label>
-                <input class="form-control {{ $errors->has('document_code') ? 'is-invalid' : '' }}" type="text" name="document_code" id="document_code" value="{{ old('document_code', $document->document_code) }}">
-                @if($errors->has('document_code'))
-                    <span class="text-danger">{{ $errors->first('document_code') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.document.fields.document_code_helper') }}</span>
-            </div>
+{{--            <div class="form-group">--}}
+{{--                <label for="document_code">{{ trans('cruds.document.fields.document_code') }}</label>--}}
+{{--                <input class="form-control {{ $errors->has('document_code') ? 'is-invalid' : '' }}" type="text" name="document_code" id="document_code" value="{{ old('document_code', $document->document_code) }}">--}}
+{{--                @if($errors->has('document_code'))--}}
+{{--                    <span class="text-danger">{{ $errors->first('document_code') }}</span>--}}
+{{--                @endif--}}
+{{--                <span class="help-block">{{ trans('cruds.document.fields.document_code_helper') }}</span>--}}
+{{--            </div>--}}
 {{--            <div class="form-group">--}}
 {{--                <label for="from_organisation">{{ trans('cruds.document.fields.from_organisation') }}</label>--}}
 {{--                <input class="form-control {{ $errors->has('from_organisation') ? 'is-invalid' : '' }}" type="text" name="from_organisation" id="from_organisation" value="{{ old('from_organisation', $document->from_organisation) }}">--}}

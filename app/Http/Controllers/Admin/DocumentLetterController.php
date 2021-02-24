@@ -9,6 +9,7 @@ use App\Http\Requests\UpdatePermissionRequest;
 use App\Models\DocumentLetter;
 use App\Models\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class DocumentLetterController extends Controller
@@ -31,9 +32,9 @@ class DocumentLetterController extends Controller
 
     public function store(Request $request)
     {
-        $document_letter = Permission::create($request->all());
+        $document_letter = DocumentLetter::create($request->all());
 
-        return redirect()->route('admin.document_letters.index');
+        return redirect()->back();
     }
 
     public function edit(DocumentLetter $documentLetter)
@@ -43,32 +44,32 @@ class DocumentLetterController extends Controller
         return view('admin.document_letters.edit', compact('$documentLetter'));
     }
 
-    public function update(UpdatePermissionRequest $request, Permission $document_letter)
+    public function update(Request $request, DocumentLetter $document_letter)
     {
         $document_letter->update($request->all());
 
-        return redirect()->route('admin.document_letters.index');
+        return redirect()->back()->with(['letter'=>'Success']);
     }
 
-    public function show(Permission $document_letter)
+    public function show(DocumentLetter $document_letter)
     {
         abort_if(Gate::denies('document_letter_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('admin.document_letters.show', compact('document_letter'));
     }
 
-    public function destroy(Permission $document_letter)
+    public function destroy(DocumentLetter $document_letter)
     {
         abort_if(Gate::denies('document_letter_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $document_letter->delete();
 
-        return back();
+        return back()->with(['letter'=>'Success']);
     }
 
-    public function massDestroy(MassDestroyPermissionRequest $request)
+    public function massDestroy(Request $request)
     {
-        Permission::whereIn('id', request('ids'))->delete();
+        DocumentLetter::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

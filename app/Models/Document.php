@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Auditable;
+use App\Traits\UsableTrait;
 use Carbon\Carbon;
 use Haruncpi\LaravelUserActivity\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +19,7 @@ class Document extends Model implements HasMedia
 {
     use SoftDeletes, InteractsWithMedia, Auditable, HasFactory,BlameableTrait;
     use Loggable;
+    use UsableTrait;
 
     public $table = 'documents';
 
@@ -70,6 +72,7 @@ class Document extends Model implements HasMedia
     {
         if ($value == 1) {
             $this->documentComments()->update(['submit'=>1]);
+            $this->update(['code_out'=>$this->codeOut()]);
         }else{
             $this->documentComments()->update(['submit'=>0]);
         }
@@ -166,6 +169,11 @@ class Document extends Model implements HasMedia
                 return false;
             }
         }
+    }
+
+    public function documentLetters()
+    {
+        return $this->hasMany(DocumentLetter::class, 'document_id');
     }
 
 }

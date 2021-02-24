@@ -41,6 +41,14 @@
                     </tr>
                     <tr>
                         <th>
+                            ABR
+                        </th>
+                        <td>
+                            {{ $category->abr }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.category.fields.description') }}
                         </th>
                         <td>

@@ -37,6 +37,10 @@ class StoreDocumentRequest extends FormRequest
 //                'required',
 //                'string',
 //            ],
+            'category_id'  => [
+                'required',
+                'integer',
+            ],
             'organisation_id'  => [
                 'required',
                 'integer',

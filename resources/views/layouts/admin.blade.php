@@ -117,7 +117,7 @@
         <div class="float-right d-none d-sm-block">
             <b>Version {{env('APP_VERSION')}}</b>
         </div>
-        {{\App\Models\AppSeeting::where('name','app_name')->first()->value('value') }}<strong> &copy;</strong> {{ trans('global.allRightsReserved') }}
+        {{\App\Models\AppSeeting::where('name','app_name')->value('value') }}<strong> &copy;</strong> {{ trans('global.allRightsReserved') }}
     </footer>
     <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
         {{ csrf_field() }}

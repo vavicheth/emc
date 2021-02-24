@@ -57,12 +57,12 @@
                     <th>
                         {{ trans('cruds.document.fields.code_out') }}
                     </th>
-                    <th>
-                        {{ trans('cruds.document.fields.document_code') }}
-                    </th>
 {{--                    <th>--}}
-{{--                        {{ trans('cruds.document.fields.category') }}--}}
+{{--                        {{ trans('cruds.document.fields.document_code') }}--}}
 {{--                    </th>--}}
+                    <th>
+                        {{ trans('cruds.document.fields.category') }}
+                    </th>
                     <th>
                         {{ trans('cruds.document.fields.from_organisation') }}
                     </th>
@@ -223,8 +223,8 @@
 { data: 'letter_code', name: 'letter_code' },
 { data: 'code_in', name: 'code_in' },
 { data: 'code_out', name: 'code_out' },
-{ data: 'document_code', name: 'document_code' },
-// { data: 'category_name', name: 'category.name' },
+// { data: 'document_code', name: 'document_code' },
+{ data: 'category_name', name: 'category.name' },
 // { data: 'from_organisation', name: 'from_organisation' },
 { data: 'organisation_name', name: 'organisation.name' },
 // { data: 'user', name: 'users.name' },

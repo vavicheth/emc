@@ -24,6 +24,8 @@ class Category extends Model
         'name',
         'name_kh',
         'description',
+        'abr',
+        'number',
         'is_active',
         'created_at',
         'updated_at',
@@ -33,5 +35,14 @@ class Category extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    public function getCatCode()
+    {
+        $number=$this->attributes['number']+1;
+        $code=$this->attributes['abr'].$number."/". now()->year;
+        $this->update(['number'=>$number]);
+
+        return $code;
     }
 }

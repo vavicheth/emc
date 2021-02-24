@@ -49,6 +49,9 @@ class CategoriesController extends Controller
             $table->editColumn('name_kh', function ($row) {
                 return $row->name_kh ? $row->name_kh : "";
             });
+            $table->editColumn('abr', function ($row) {
+                return $row->abr ? $row->abr : "";
+            });
             $table->editColumn('description', function ($row) {
                 return $row->description ? $row->description : "";
             });

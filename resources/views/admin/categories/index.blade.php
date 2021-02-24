@@ -31,6 +31,9 @@
                         {{ trans('cruds.category.fields.name_kh') }}
                     </th>
                     <th>
+                        ABR
+                    </th>
+                    <th>
                         {{ trans('cruds.category.fields.description') }}
                     </th>
                     <th>
@@ -40,26 +43,29 @@
                         &nbsp;
                     </th>
                 </tr>
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
+{{--                <tr>--}}
+{{--                    <td>--}}
+{{--                    </td>--}}
+{{--                    <td>--}}
+{{--                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">--}}
+{{--                    </td>--}}
+{{--                    <td>--}}
+{{--                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">--}}
+{{--                    </td>--}}
+{{--                    <td>--}}
+{{--                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">--}}
+{{--                    </td>--}}
+{{--                    <td>--}}
+{{--                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">--}}
+{{--                    </td>--}}
+{{--                    <td>--}}
+{{--                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">--}}
+{{--                    </td>--}}
+{{--                    <td>--}}
+{{--                    </td>--}}
+{{--                    <td>--}}
+{{--                    </td>--}}
+{{--                </tr>--}}
             </thead>
         </table>
     </div>
@@ -115,6 +121,7 @@
 { data: 'id', name: 'id' },
 { data: 'name', name: 'name' },
 { data: 'name_kh', name: 'name_kh' },
+{ data: 'abr', name: 'abr' },
 { data: 'description', name: 'description' },
 { data: 'is_active', name: 'is_active' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
@@ -128,7 +135,7 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 let visibleColumnsIndexes = null;
 $('.datatable thead').on('input', '.search', function () {
       let strict = $(this).attr('strict') || false

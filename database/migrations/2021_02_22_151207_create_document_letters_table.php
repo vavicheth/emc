@@ -23,6 +23,7 @@ class CreateDocumentLettersTable extends Migration
             $table->longText('description')->nullable();
             $table->text('to_place')->nullable();
             $table->text('text_date')->nullable();
+            $table->date('date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
