@@ -102,6 +102,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('documents/media', 'DocumentController@storeMedia')->name('documents.storeMedia');
     Route::post('documents/ckmedia', 'DocumentController@storeCKEditorImages')->name('documents.storeCKEditorImages');
     Route::get('documents/print/{id}', 'DocumentController@print')->name('documents.print');
+    Route::get('documents/print_letter/{id}', 'DocumentController@print_letter')->name('documents.print_letter');
     Route::get('documents/send_mail', 'DocumentController@sendMail')->name('documents.sendMail');
     Route::resource('documents', 'DocumentController');
 

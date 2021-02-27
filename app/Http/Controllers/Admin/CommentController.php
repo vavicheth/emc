@@ -88,6 +88,13 @@ class CommentController extends Controller
 
     public function store(StoreCommentRequest $request)
     {
+        abort_if(Gate::denies('comment_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $doc=Document::findOrFail($request->document_id);
+        $cm=$doc->documentComments()->where('user_id',auth()->id())->count();
+        if ($cm >= 1) {
+            return redirect()->back();
+        }
+
         $comment = Comment::create($request->all());
 
         if ($media = $request->input('ck-media', false)) {

@@ -26,7 +26,7 @@
                         <td>{!! Str::limit($letter->description,25)!!}</td>
                         <td>
                             @can('document_letter_show')
-                                <a class="btn btn-xs btn-primary" href="{{ route('admin.document_letters.show', $letter->id) }}">
+                                <a class="btn btn-xs btn-primary" href="{{route('admin.documents.print_letter',$letter->id)}}"  target="_blank">
                                    <i class="fa fa-print"></i> Print
                                 </a>
                             @endcan

@@ -11,6 +11,7 @@ use App\Http\Requests\UpdateDocumentRequest;
 use App\Mail\DocumentMail;
 use App\Models\Category;
 use App\Models\Document;
+use App\Models\DocumentLetter;
 use App\Models\DocumentType;
 use App\Models\Organisation;
 use App\Models\User;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
-use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Excel;
 use Mpdf\Mpdf;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -221,7 +222,7 @@ class DocumentController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $document->id]);
         }
 
-        $this->sendMail($document);
+        $this->sendMail($document,$request->users);
 
         return redirect()->route('admin.documents.index');
     }
@@ -255,6 +256,10 @@ class DocumentController extends Controller
     public function update(UpdateDocumentRequest $request, Document $document)
     {
         abort_if(Gate::denies('document_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $old_users=$document->users->pluck('id')->toArray();
+        $new_users=$request->users;
+        $get_users=array_diff($new_users,$old_users);
+
         if ($document->isEditOver() && !auth()->user()->can('document_grand_access')) {
             abort(Response::HTTP_FORBIDDEN, '403 Forbidden');
         }
@@ -284,6 +289,8 @@ class DocumentController extends Controller
                 $document->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('document_file');
             }
         }
+
+        $this->sendMail($document,$get_users);
 
         return redirect()->route('admin.documents.index');
     }
@@ -351,9 +358,8 @@ class DocumentController extends Controller
 //        return $pdf->stream();
 
 
-//        $pdf=Pdf::loadView('admin.documents.includes.print', ['document'=>$document,'users'=>$users]);
-//        $stylesheet = file_get_contents(base_path().'/public/css/app.css');
-//        return $pdf->stream('document.pdf');
+        $pdf=Pdf::loadView('admin.documents.includes.print', ['document'=>$document,'users'=>$users]);
+        return $pdf->stream('document.pdf');
 
 
 //        $path = Storage::disk('local')->path("_letters(".$letterCount."-letters).pdf");
@@ -394,26 +400,34 @@ class DocumentController extends Controller
 
 
 //        $export = new DocumentExport($document,$users);
-//        return Excel::download($export, $document->code_in.'.pdf', \Maatwebsite\Excel\Excel::MPDF);
+////        return Excel::download($export, $document->code_in.'.pdf', \Maatwebsite\Excel\Excel::MPDF);
+//        return \Maatwebsite\Excel\Facades\Excel::download($export, 'test.pdf', Excel::MPDF);
 //
         return view('admin.documents.includes.print_html',compact('document','users'));
     }
 
-    public function sendMail(Document $document)
+    public function print_letter($id)
     {
-        $emails=$document->users->pluck('email')->toArray();
-            $details=[
-                'subject'=>'យោបល់លើឯកសារ លេខៈ '. $document->code_in ,
-                'title'=>'លោកអ្នកត្រូវមានយោបល់លើឯកសារលេខៈ <b>' . $document->code_in . '</b>។ សូមលោកអ្នកចុចលើតំណរភ្ជាប់ខាងក្រោម ដើម្បីមានយោបល់៖',
-                'body'=>'<a class="btn btn-primary" href="'. route('admin.documents.show',$document->id) .'"><i class="fa fa-hand-point-right"></i> ឯកសារលេខ '. $document->code_in . '</a>',
-            ];
+        $letter=DocumentLetter::findOrFail($id);
 
-            foreach ($emails as $email)
-            {
-                Mail::to($email)->send(new DocumentMail($details));
-            }
+        $pdf=Pdf::loadView('admin.documents.includes.print_letter', ['letter'=>$letter]);
+        return $pdf->stream('Letter.pdf');
     }
 
+    public function sendMail(Document $document,$users=[])
+    {
+        $emails=User::whereIn('id',$users)->pluck('email')->toArray();
+        $details=[
+            'subject'=>'យោបល់លើឯកសារ លេខៈ '. $document->code_in ,
+            'title'=>'លោកអ្នកត្រូវមានយោបល់លើឯកសារលេខៈ <b>' . $document->code_in . '</b>។ សូមលោកអ្នកចុចលើតំណរភ្ជាប់ខាងក្រោម ដើម្បីមានយោបល់៖',
+            'body'=>'<a class="btn btn-primary" href="'. route('admin.documents.show',$document->id) .'"><i class="fa fa-hand-point-right"></i> ឯកសារលេខ '. $document->code_in . '</a>',
+        ];
+
+        foreach ($emails as $email)
+        {
+            Mail::to($email)->send(new DocumentMail($details));
+        }
+    }
 
 
 }

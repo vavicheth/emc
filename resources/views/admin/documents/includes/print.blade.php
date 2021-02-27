@@ -32,21 +32,25 @@
 {{--        </div>--}}
     </div>
 
-    <div style="float: right; width: 50%">
+<div style="width: 100%">
+    <div style="float: right;width: 30%">
         <span class='content'><b>លិខិតលេខៈ </b> {{$document->letter_code}}</span><br>
         <span class='content'><b>លេខលិខិតចូលៈ </b> {{$document->code_in}}</span><br>
-        <span class='content'><b>លេខសំគាល់ឯកសារៈ </b> {{$document->document_code}}</span><br>
+{{--        <span class='content'><b>លេខសំគាល់ឯកសារៈ </b> {{$document->document_code}}</span><br>--}}
         <span class='content'><b>ចុះថ្ងៃទីៈ </b> {{$document->created_at->format('d-M-Y H:i:s')}}</span><br>
         <span class='content'><b>អ្នកបញ្ចូលលិខិតៈ </b>{{$document->creator->staff ? (($document->creator->staff->title ? $document->creator->staff->title->name_kh : '') . ' ' . $document->creator->staff->name_kh) : $document->creator->name}}</span><br>
     </div>
 
-    <div id="logo" style="float: left;" >
-        <span class='content ml-3'>ក្រសួងសុខាភិបាល</span>
+    <div id="logo" style="width: 70%;" >
+{{--        <span class='content ml-3'>ក្រសួងសុខាភិបាល</span>--}}
         <div class="ml-3">
-{{--            <img class="ml-2" src="{{asset('photos/Logo_Calmette_BW.jpg')}}" height="120px" width="auto" /><br>--}}
+            {{--            <img class="ml-2" src="{{asset('photos/Logo_Calmette_BW.jpg')}}" height="120px" width="auto" /><br>--}}
             <img class="ml-2" src="{{base_path().'/public/photos/emc_logo.png'}}" height="80px" width="auto" /><br>
         </div>
     </div>
+</div>
+
+
 <br>
 
     <div class="pull-right">
@@ -57,7 +61,7 @@
 
     <div class="ml-5 mr-5 mt-2" id="docinfo">
         <span class='content float-leftt'><b>មកពីៈ </b> {{$document->organisation->name}}</span><br>
-        <span class='content float-leftt'><b>កម្មវត្ថុៈ </b> {!! $document->description !!}</span>
+        <span class='content float-leftt' style="line-height: 80%;"><b>កម្មវត្ថុៈ </b> {!! $document->description !!}</span>
         <hr>
     </div>
 
@@ -65,9 +69,14 @@
     @foreach($user->comments as $comment)
     <!-- Comment user in document -->
         <div class="ml-5 mr-5 mb-3 mt-2">
-            <span class='title2 float-left'>{{$user->staff ? ($user->staff->department ? ($user->staff->department->name_kh) : '') : ''}}: &nbsp; </span>
-            <span class='content float-left'><b>{{$user->staff ? (($user->staff->title ? $user->staff->title->name_kh : '') . ' ' . $user->staff->name_kh) : ''}}៖ </b></span>
-            <span  class='content right' style="float: right; width: 70%">{{$comment->updated_at->format('d-M-Y   H:i:s')}}</span><br>
+            <div style="float: right; width: 30%">
+                <span  class='content right' style="float: right; width: 70%">{{$comment->updated_at->format('d-M-Y   H:i:s')}}</span><br>
+            </div>
+            <div style="width: 70%; ">
+                <span class='title2 float-left'>{{$user->staff ? ($user->staff->department ? ($user->staff->department->name_kh) : '') : ''}}: &nbsp; </span>
+                <span class='content float-left'><b>{{$user->staff ? (($user->staff->title ? $user->staff->title->name_kh : '') . ' ' . $user->staff->name_kh) : ''}}៖ </b></span>
+            </div>
+
             <span style="font-family: khmerosbattambang">{!! $comment->comment !!}</span>
         </div>
     @endforeach
@@ -75,10 +84,9 @@
 @endforeach
 
     <div class="ml-5 mr-5 mb-3 mt-2" align="center">
-        <span class='title2'>អគ្គនាយកមន្ទីរពេទ្យ</span><br>
+        <span class='title2'>ប្រធាន</span><br>
         {{--<a class='content'><b>ឯកឧត្តមសាស្ត្រាចារ្យ ឈាង រ៉ា ៖</b></a><br>--}}
     </div>
-
 
 
 {{--</page>--}}
