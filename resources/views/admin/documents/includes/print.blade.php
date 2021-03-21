@@ -18,6 +18,9 @@
         .right {
             float: right;
         }
+        body{
+            font-family: khmerosbattambang; font-size: 13px;
+        }
     </style>
 </head>
 
@@ -45,7 +48,7 @@
 {{--        <span class='content ml-3'>ក្រសួងសុខាភិបាល</span>--}}
         <div class="ml-3">
             {{--            <img class="ml-2" src="{{asset('photos/Logo_Calmette_BW.jpg')}}" height="120px" width="auto" /><br>--}}
-            <img class="ml-2" src="{{base_path().'/public/photos/emc_logo.png'}}" height="80px" width="auto" /><br>
+{{--            <img class="ml-2" src="{{\App\Models\AppSeeting::where('name','logo')->first()->photo != null ? \App\Models\AppSeeting::where('name','logo')->first()->photo->getUrl() : asset('photos/logo.png')}}" height="80px" width="auto" /><br>--}}
         </div>
     </div>
 </div>

@@ -50,9 +50,9 @@ class DocumentLetter extends Model
         $this->attributes['date'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 
-    public function documents()
+    public function document()
     {
-        $this->belongsTo(Document::class, 'document_id');
+        return $this->belongsTo(Document::class, 'document_id');
     }
 
 }

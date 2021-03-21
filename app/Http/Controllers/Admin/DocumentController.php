@@ -258,7 +258,13 @@ class DocumentController extends Controller
         abort_if(Gate::denies('document_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $old_users=$document->users->pluck('id')->toArray();
         $new_users=$request->users;
-        $get_users=array_diff($new_users,$old_users);
+        dd($request->all());
+        if (request('users')) {
+            $get_users=array_diff($new_users,$old_users);
+        }else{
+            $get_users=[];
+        }
+
 
         if ($document->isEditOver() && !auth()->user()->can('document_grand_access')) {
             abort(Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -409,8 +415,9 @@ class DocumentController extends Controller
     public function print_letter($id)
     {
         $letter=DocumentLetter::findOrFail($id);
+        $document=$letter->document;
 
-        $pdf=Pdf::loadView('admin.documents.includes.print_letter', ['letter'=>$letter]);
+        $pdf=Pdf::loadView('admin.documents.includes.print_letter', ['letter'=>$letter,'document'=>$document]);
         return $pdf->stream('Letter.pdf');
     }
 

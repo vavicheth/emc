@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Letter Print</title>
-{{--    <link rel="stylesheet" href="{{ltrim(public_path('css/app.css')}}" type="text/css">--}}
-{{--    <link rel="stylesheet" href="{{asset('js/plugins/print/style_print.css')}}">--}}
+    {{--    <link rel="stylesheet" href="{{ltrim(public_path('css/app.css')}}" type="text/css">--}}
+    {{--    <link rel="stylesheet" href="{{asset('js/plugins/print/style_print.css')}}">--}}
 
     <style>
         .title1 {font-family: Khmerosmoullight; font-size: 16px; }
@@ -12,12 +12,15 @@
         .title3 {font-family: Khmerosmoul; font-size:13px; font-style: normal}
         .content {font-family: khmerosbattambang; font-size: 13px;}
         .content_table {font-family: khmerosbattambang; font-size: 13px;}
-        .content-small {font-family: khmerosbattambang; font-size: 11px;}
+        .content-small {font-family: khmerosbattambang; font-size: 12px;}
         p{
             font-family: khmerosbattambang; font-size: 13px;
         }
         .right {
             float: right;
+        }
+        body{
+            font-family: khmerosbattambang; font-size: 13px;
         }
     </style>
 </head>
@@ -25,20 +28,21 @@
 <body>
 
 {{--<page size='A4' layout='landscape'>--}}
-    <div align="center" >
-        <span class='title1'>ព្រះរាជាណាចក្រកម្ពុជា</span><br>
-        <span class='title2'>ជាតិ សាសនា ព្រះមហាក្សត្រ</span><br>
-{{--        <div style="width: 120px; align-self: center">--}}
-            <hr style="border: double; width: 120px">
-{{--        </div>--}}
-    </div>
+<div align="center" >
+    <span class='title1'>ព្រះរាជាណាចក្រកម្ពុជា</span><br>
+    <span class='title2'>ជាតិ សាសនា ព្រះមហាក្សត្រ</span><br>
+    {{--        <div style="width: 120px; align-self: center">--}}
+    <hr style="border: double; width: 120px">
+    {{--        </div>--}}
+</div>
 
 <div style="width: 100%">
     <div id="logo" style="width: 70%;" >
-{{--        <span class='content ml-3'>ក្រសួងសុខាភិបាល</span>--}}
+        {{--        <span class='content ml-3'>ក្រសួងសុខាភិបាល</span>--}}
         <div class="ml-3">
             {{--            <img class="ml-2" src="{{asset('photos/Logo_Calmette_BW.jpg')}}" height="120px" width="auto" /><br>--}}
-            <img class="ml-2" src="{{base_path().'/public/photos/emc_logo.png'}}" height="80px" width="auto" /><br>
+            <img class="ml-2" src="{{base_path('public/photos/emc_logo.png')}}" height="80px" width="auto" /><br>
+            <span>លេខៈ {{$document->code_out}}</span>
         </div>
     </div>
 </div>
@@ -64,14 +68,19 @@
 <div style="width: 100%">
     <div id="logo" style="width: 50%; float: right;position: absolute; text-align: center" >
         <span class='content'>{!! $letter->text_date !!}</span><br>
-        <span class='content'> រាជធានីភ្នំពេញ, ថ្ងៃ {{\Carbon\Carbon::parse($letter->date)->day}} ខែ {{\Carbon\Carbon::parse($letter->date)->month}} ឆ្នាំ{{\Carbon\Carbon::parse($letter->date)->year}}</span><br>
+{{--        <span class='content'> រាជធានីភ្នំពេញ, ថ្ងៃ {{\Carbon\Carbon::parse($letter->date)->day}} ខែ {{\Carbon\Carbon::parse($letter->date)->month}} ឆ្នាំ{{\Carbon\Carbon::parse($letter->date)->year}}</span><br>--}}
+        <span class='content'> រាជធានីភ្នំពេញ, ថ្ងៃទី {{\KhmerDateTime\KhmerDateTime::parse($letter->date)->day()}} ខែ{{\KhmerDateTime\KhmerDateTime::parse($letter->date) ->fullMonth()}} ឆ្នាំ{{\KhmerDateTime\KhmerDateTime::parse($letter->date)->year()}}</span><br>
+{{--        <span class='content'> រាជធានីភ្នំពេញ, {{\KhmerDateTime\KhmerDateTime::parse($letter->date)->format("LLLL")}}</span><br>--}}
     </div>
     <div id="logo" style="width: 50%;" >
     </div>
 </div>
 
-<div style="width: 50%; line-height: 70%;" class="content-small">
-    <span>{!! $letter->to_place !!}</span><br>
+<div style="width: 50%;" class="content-small">
+    @if ($letter->to_place)
+        <span><u>ចម្លងជូនៈ</u></span><br>
+        <span>{!! $letter->to_place !!}</span><br>
+    @endif
 </div>
 
 
