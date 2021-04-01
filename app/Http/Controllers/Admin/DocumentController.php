@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Traits\UsableTrait;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
@@ -114,6 +115,10 @@ class DocumentController extends Controller
             });
 
             $table->setRowClass(function ($row) {
+                $date = new Carbon();
+                if ($row->submit == '0' && $date > $row->datline) {
+                    return 'text-danger';
+                }
                 if (!request('close')==1 && $row->documentComments()->where('user_id',auth()->id())->count() > 0 ) {
                     return 'bg-light-info';
                 }elseif(!request('close')==1 && $row->isDatelineOver(24) ) {
@@ -151,16 +156,16 @@ class DocumentController extends Controller
 
             $table->editColumn('complete', function ($row) {
                 if ($row->complete) {
-                    return '<span class="badge badge-success">Completed</span>';
+                    return '<span class="badge badge-success"><i class="fas fa-check"></i></span>';
                 }else{
-                    return '<span class="badge badge-primary">Processing</span>';
+                    return $row->date_complete ?? " ";
                 }
             });
             $table->editColumn('submit', function ($row) {
                 if ($row->submit) {
-                    return '<span class="badge badge-danger">Closed</span>';
+                    return '<span class="badge badge-success"><i class="fas fa-check"></i></span>';
                 }else{
-                    return '<span class="badge badge-success">Active</span>';
+                    return $row->dateline ?? " ";
                 }
             });
 
@@ -258,7 +263,7 @@ class DocumentController extends Controller
         abort_if(Gate::denies('document_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $old_users=$document->users->pluck('id')->toArray();
         $new_users=$request->users;
-        dd($request->all());
+//        dd($request->all());
         if (request('users')) {
             $get_users=array_diff($new_users,$old_users);
         }else{

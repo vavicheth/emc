@@ -71,6 +71,7 @@
 {{--        <span class='content'> រាជធានីភ្នំពេញ, ថ្ងៃ {{\Carbon\Carbon::parse($letter->date)->day}} ខែ {{\Carbon\Carbon::parse($letter->date)->month}} ឆ្នាំ{{\Carbon\Carbon::parse($letter->date)->year}}</span><br>--}}
         <span class='content'> រាជធានីភ្នំពេញ, ថ្ងៃទី {{\KhmerDateTime\KhmerDateTime::parse($letter->date)->day()}} ខែ{{\KhmerDateTime\KhmerDateTime::parse($letter->date) ->fullMonth()}} ឆ្នាំ{{\KhmerDateTime\KhmerDateTime::parse($letter->date)->year()}}</span><br>
 {{--        <span class='content'> រាជធានីភ្នំពេញ, {{\KhmerDateTime\KhmerDateTime::parse($letter->date)->format("LLLL")}}</span><br>--}}
+        <img class="ml-2" src="{{base_path('public/photos/sign.png')}}" height="80px" width="auto" /><br>
     </div>
     <div id="logo" style="width: 50%;" >
     </div>

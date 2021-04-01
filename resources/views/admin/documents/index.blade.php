@@ -87,12 +87,12 @@
 {{--                    <th>--}}
 {{--                        {{ trans('cruds.document.fields.date_complete') }}--}}
 {{--                    </th>--}}
-{{--                    <th>--}}
-{{--                        {{ trans('cruds.document.fields.complete') }}--}}
-{{--                    </th>--}}
-                    <th>
-                        {{ trans('cruds.document.fields.submit') }}
+                    <th style="text-align: center">
+                        {{ trans('cruds.document.fields.complete') }}
                     </th>
+{{--                    <th>--}}
+{{--                        {{ trans('cruds.document.fields.submit') }}--}}
+{{--                    </th>--}}
                     <th width="10%" style="padding: 1px !important; text-align: center">
                     </th>
                 </tr>
@@ -211,6 +211,9 @@
 @endcan
 
   let dtOverrideGlobals = {
+    columnDefs: [
+        { className: "dt-center", "targets": [9,10] },
+    ],
     buttons: dtButtons,
     processing: true,
     serverSide: true,
@@ -231,10 +234,10 @@
 { data: 'description', name: 'description' },
 { data: 'document_file', name: 'document_file', sortable: false, searchable: false },
 // { data: 'document_type_name', name: 'document_type.name' },
-{ data: 'dateline', name: 'dateline' },
-// { data: 'date_complete', name: 'date_complete' },
-// { data: 'complete', name: 'complete' },
 { data: 'submit', name: 'submit' },
+{ data: 'complete', name: 'complete' },
+// { data: 'date_complete', name: 'date_complete' },
+// { data: 'submit', name: 'submit' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

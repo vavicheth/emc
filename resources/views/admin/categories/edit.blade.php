@@ -34,6 +34,16 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.category.fields.name_kh_helper') }}</span>
             </div>
+
+            <div class="form-group">
+                <label for="number">Number</label>
+                <input class="form-control {{ $errors->has('number') ? 'is-invalid' : '' }}" type="text" name="number" id="number" value="{{ old('number', $category->number) }}">
+                @if($errors->has('number'))
+                    <span class="text-danger">{{ $errors->first('number') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.category.fields.name_kh_helper') }}</span>
+            </div>
+
             <div class="form-group">
                 <label for="description">{{ trans('cruds.category.fields.description') }}</label>
                 <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{{ old('description', $category->description) }}</textarea>
