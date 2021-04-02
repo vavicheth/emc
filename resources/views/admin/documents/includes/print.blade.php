@@ -69,27 +69,46 @@
     </div>
 
 @foreach($users as $user)
-    @foreach($user->comments as $comment)
-    <!-- Comment user in document -->
-        <div class="ml-5 mr-5 mb-3 mt-2">
-            <div style="float: right; width: 30%">
-                <span  class='content right' style="float: right; width: 70%">{{$comment->updated_at->format('d-M-Y   H:i:s')}}</span><br>
-            </div>
-            <div style="width: 70%; ">
-                <span class='title2 float-left'>{{$user->staff ? ($user->staff->department ? ($user->staff->department->name_kh) : '') : ''}}: &nbsp; </span>
-                <span class='content float-left'><b>{{$user->staff ? (($user->staff->title ? $user->staff->title->name_kh : '') . ' ' . $user->staff->name_kh) : ''}}៖ </b></span>
+    @if (!$loop->last)
+        @foreach($user->comments as $comment)
+
+            <!-- Comment user in document -->
+            <div class="ml-5 mr-5 mb-3 mt-2">
+                <div style="float: right; width: 30%">
+                    <span  class='content right' style="float: right; width: 70%">{{$comment->updated_at->format('d-M-Y   H:i:s')}}</span><br>
+                </div>
+                <div style="width: 70%; ">
+                    <span class='title2 float-left'>{{$user->staff ? ($user->staff->department ? ($user->staff->department->name_kh) : '') : ''}}: &nbsp; </span>
+                    <span class='content float-left'><b>{{$user->staff ? (($user->staff->title ? $user->staff->title->name_kh : '') . ' ' . $user->staff->name_kh) : ''}}៖ </b></span>
+                </div>
+
+                <span style="font-family: khmerosbattambang">{!! $comment->comment !!}</span>
             </div>
 
-            <span style="font-family: khmerosbattambang">{!! $comment->comment !!}</span>
-        </div>
-    @endforeach
+        @endforeach
+    @else
+
+        @foreach($user->comments as $comment)
+            <div class="ml-5 mr-5 mb-3 mt-2" style="text-align: center">
+                <span class='title2'>{{$user->staff ? ($user->staff->department ? ($user->staff->department->name_kh) : '') : ''}}</span><br>
+                    <span style="font-family: khmerosbattambang; text-align: center">{!! $comment->comment !!}</span>
+
+                    @if ($comment->is_esign == '1')
+                        @if ($user->staff)
+                            @if ($user->staff->sigature)
+                                <img class="ml-2" src="{{$user->staff->sigature->getUrl()}}" height="80px" width="auto" /><br>
+                            @endif
+                        @endif
+                    @endif
+                    <span  class='title2'>{{$user->staff ? (($user->staff->title ? $user->staff->title->name_kh : '') . ' ' . $user->staff->name_kh) : ''}}</span>
+            </div>
+        @endforeach
+
+    @endif
 
 @endforeach
 
-    <div class="ml-5 mr-5 mb-3 mt-2" align="center">
-        <span class='title2'>ប្រធាន</span><br>
-        {{--<a class='content'><b>ឯកឧត្តមសាស្ត្រាចារ្យ ឈាង រ៉ា ៖</b></a><br>--}}
-    </div>
+
 
 
 {{--</page>--}}

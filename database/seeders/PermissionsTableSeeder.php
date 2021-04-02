@@ -1039,96 +1039,184 @@ class PermissionsTableSeeder extends Seeder
             array (
                 'id' => 128,
                 'title' => 'document_complete_access',
-                'created_at' => '2021-02-02 07:10:44',
-                'updated_at' => '2021-02-02 07:10:44',
+                'created_at' => '2021-02-02 19:10:44',
+                'updated_at' => '2021-02-02 19:10:44',
                 'deleted_at' => NULL,
             ),
             128 => 
             array (
                 'id' => 129,
                 'title' => 'document_complete_create',
-                'created_at' => '2021-02-02 07:10:51',
-                'updated_at' => '2021-02-02 07:10:51',
+                'created_at' => '2021-02-02 19:10:51',
+                'updated_at' => '2021-02-02 19:10:51',
                 'deleted_at' => NULL,
             ),
             129 => 
             array (
                 'id' => 130,
                 'title' => 'document_complete_edit',
-                'created_at' => '2021-02-02 07:10:58',
-                'updated_at' => '2021-02-02 07:10:58',
+                'created_at' => '2021-02-02 19:10:58',
+                'updated_at' => '2021-02-02 19:10:58',
                 'deleted_at' => NULL,
             ),
             130 => 
             array (
                 'id' => 131,
                 'title' => 'document_complete_delete',
-                'created_at' => '2021-02-02 07:11:06',
-                'updated_at' => '2021-02-02 07:11:06',
+                'created_at' => '2021-02-02 19:11:06',
+                'updated_at' => '2021-02-02 19:11:06',
                 'deleted_at' => NULL,
             ),
             131 => 
             array (
                 'id' => 132,
                 'title' => 'document_complete_show',
-                'created_at' => '2021-02-02 07:11:18',
-                'updated_at' => '2021-02-02 07:11:18',
+                'created_at' => '2021-02-02 19:11:18',
+                'updated_at' => '2021-02-02 19:11:18',
                 'deleted_at' => NULL,
             ),
             132 => 
             array (
                 'id' => 133,
                 'title' => 'comment_grand_access',
-                'created_at' => '2021-02-02 07:11:33',
-                'updated_at' => '2021-02-02 07:11:33',
+                'created_at' => '2021-02-02 19:11:33',
+                'updated_at' => '2021-02-02 19:11:33',
                 'deleted_at' => NULL,
             ),
             133 => 
             array (
                 'id' => 134,
                 'title' => 'comment_status_view',
-                'created_at' => '2021-02-02 07:11:42',
-                'updated_at' => '2021-02-02 07:11:42',
+                'created_at' => '2021-02-02 19:11:42',
+                'updated_at' => '2021-02-02 19:11:42',
                 'deleted_at' => NULL,
             ),
             134 => 
             array (
                 'id' => 135,
                 'title' => 'document_print_access',
-                'created_at' => '2021-02-02 07:11:51',
-                'updated_at' => '2021-02-02 07:11:51',
+                'created_at' => '2021-02-02 19:11:51',
+                'updated_at' => '2021-02-02 19:11:51',
                 'deleted_at' => NULL,
             ),
             135 => 
             array (
                 'id' => 136,
                 'title' => 'document_grand_access',
-                'created_at' => '2021-02-02 07:11:59',
-                'updated_at' => '2021-02-02 07:11:59',
+                'created_at' => '2021-02-02 19:11:59',
+                'updated_at' => '2021-02-02 19:11:59',
                 'deleted_at' => NULL,
             ),
             136 => 
             array (
                 'id' => 137,
                 'title' => 'document_submit_access',
-                'created_at' => '2021-02-02 17:58:31',
-                'updated_at' => '2021-02-02 17:58:31',
+                'created_at' => '2021-02-03 05:58:31',
+                'updated_at' => '2021-02-03 05:58:31',
                 'deleted_at' => NULL,
             ),
             137 => 
             array (
                 'id' => 138,
                 'title' => 'document_delete_all',
-                'created_at' => '2021-02-04 12:07:53',
-                'updated_at' => '2021-02-04 12:07:53',
+                'created_at' => '2021-02-05 00:07:53',
+                'updated_at' => '2021-02-05 00:07:53',
                 'deleted_at' => NULL,
             ),
             138 => 
             array (
                 'id' => 139,
                 'title' => 'comment_grand_edit',
-                'created_at' => '2021-02-04 23:00:46',
-                'updated_at' => '2021-02-04 23:00:46',
+                'created_at' => '2021-02-05 11:00:46',
+                'updated_at' => '2021-02-05 11:00:46',
+                'deleted_at' => NULL,
+            ),
+            139 => 
+            array (
+                'id' => 140,
+                'title' => 'user_log_access',
+                'created_at' => '2021-02-08 22:09:41',
+                'updated_at' => '2021-02-08 22:09:41',
+                'deleted_at' => NULL,
+            ),
+            140 => 
+            array (
+                'id' => 141,
+                'title' => 'document_letter_access',
+                'created_at' => '2021-02-24 03:35:59',
+                'updated_at' => '2021-02-24 03:35:59',
+                'deleted_at' => NULL,
+            ),
+            141 => 
+            array (
+                'id' => 142,
+                'title' => 'document_letter_create',
+                'created_at' => '2021-02-24 03:36:15',
+                'updated_at' => '2021-02-24 03:36:15',
+                'deleted_at' => NULL,
+            ),
+            142 => 
+            array (
+                'id' => 143,
+                'title' => 'document_letter_edit',
+                'created_at' => '2021-02-24 03:36:33',
+                'updated_at' => '2021-02-24 03:36:33',
+                'deleted_at' => NULL,
+            ),
+            143 => 
+            array (
+                'id' => 144,
+                'title' => 'document_letter_delete',
+                'created_at' => '2021-02-24 03:36:48',
+                'updated_at' => '2021-02-24 03:36:48',
+                'deleted_at' => NULL,
+            ),
+            144 => 
+            array (
+                'id' => 145,
+                'title' => 'document_letter_show',
+                'created_at' => '2021-02-24 03:36:54',
+                'updated_at' => '2021-02-24 03:36:54',
+                'deleted_at' => NULL,
+            ),
+            145 => 
+            array (
+                'id' => 146,
+                'title' => 'report_access',
+                'created_at' => '2021-04-02 09:43:44',
+                'updated_at' => '2021-04-02 09:43:44',
+                'deleted_at' => NULL,
+            ),
+            146 => 
+            array (
+                'id' => 147,
+                'title' => 'report_create',
+                'created_at' => '2021-04-02 09:44:05',
+                'updated_at' => '2021-04-02 09:44:05',
+                'deleted_at' => NULL,
+            ),
+            147 => 
+            array (
+                'id' => 148,
+                'title' => 'report_edit',
+                'created_at' => '2021-04-02 09:44:14',
+                'updated_at' => '2021-04-02 09:44:14',
+                'deleted_at' => NULL,
+            ),
+            148 => 
+            array (
+                'id' => 149,
+                'title' => 'report_delete',
+                'created_at' => '2021-04-02 09:44:21',
+                'updated_at' => '2021-04-02 09:44:21',
+                'deleted_at' => NULL,
+            ),
+            149 => 
+            array (
+                'id' => 150,
+                'title' => 'report_show',
+                'created_at' => '2021-04-02 09:44:26',
+                'updated_at' => '2021-04-02 09:44:26',
                 'deleted_at' => NULL,
             ),
         ));

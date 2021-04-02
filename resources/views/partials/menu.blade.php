@@ -48,6 +48,18 @@
                         </a>
                     </li>
                 @endcan
+                @can('report_access')
+                    <li class="nav-item">
+                        <a href="{{ route("admin.reports") }}" class="nav-link {{ request()->is("admin/reports") || request()->is("admin/reports/*") ? "active" : "" }}">
+                            <i class="fa-fw nav-icon fas fa-chart-bar">
+
+                            </i>
+                            <p>
+                                Report
+                            </p>
+                        </a>
+                    </li>
+                @endcan
 {{--                @can('comment_access')--}}
 {{--                    <li class="nav-item">--}}
 {{--                        <a href="{{ route("admin.comments.index") }}" class="nav-link {{ request()->is("admin/comments") || request()->is("admin/comments/*") ? "active" : "" }}">--}}

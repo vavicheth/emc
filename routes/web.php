@@ -106,6 +106,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('documents/send_mail', 'DocumentController@sendMail')->name('documents.sendMail');
     Route::resource('documents', 'DocumentController');
 
+    // Report
+    Route::get('reports', 'ReportController@index')->name('reports');
+
     // Document Letter
 //    Route::delete('document_letters/destroy', 'DocumentLetterController@massDestroy')->name('document_letters.massDestroy');
     Route::resource('document_letters', 'DocumentLetterController');

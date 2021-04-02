@@ -69,6 +69,26 @@ class AppSeetingsTableSeeder extends Seeder
                 'updated_at' => '2021-02-04 14:26:07',
                 'deleted_at' => NULL,
             ),
+            5 => 
+            array (
+                'id' => 6,
+                'name' => 'code_out',
+                'value' => '0',
+                'description' => NULL,
+                'created_at' => '2021-04-02 14:42:05',
+                'updated_at' => '2021-04-02 14:42:05',
+                'deleted_at' => NULL,
+            ),
+            6 => 
+            array (
+                'id' => 7,
+                'name' => 'text_code',
+                'value' => 'EMC',
+                'description' => NULL,
+                'created_at' => '2021-04-02 14:42:23',
+                'updated_at' => '2021-04-02 14:42:23',
+                'deleted_at' => NULL,
+            ),
         ));
         
         
